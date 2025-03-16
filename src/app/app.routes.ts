@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { BankerListComponent } from './pages/banker-list/banker-list.component';
+import { CustomerListComponent } from './pages/customer-list/customer-list.component';
+import { LoanApplicationListComponent } from './pages/loan-application-list/loan-application-list.component';
+import { NewLoanFormComponent } from './pages/new-loan-form/new-loan-form.component';
 export const routes: Routes = [
     {
         path: '',
@@ -14,5 +17,17 @@ export const routes: Routes = [
     {
         path: 'banker-list',
         component: BankerListComponent,
+    },
+    {
+        path: 'customer-list',
+        component: CustomerListComponent,
+    },
+    {
+        path: 'application-list',
+        component: LoanApplicationListComponent,
+    },
+    {
+        path: 'new-loan',
+        component: NewLoanFormComponent,
     }
 ];
