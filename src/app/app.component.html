@@ -1,47 +1,45 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="javascript:void(0)">Logo</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#mynavbar"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mynavbar">
-        <ul class="navbar-nav me-auto">             
-          <li class="nav-item" >
-            <a class="nav-link active" routerLink="banker-list">Banker List</a>
-          </li>
-  
-          <li class="nav-item" >
-            <a class="nav-link" routerLink="customer-list">Customer List</a>
-          </li>
-          <li class="nav-item" >
-            <a class="nav-link" routerLink="application-list">Application</a>
-          </li>
-          <li class="nav-item" >
-            <a class="nav-link" routerLink="new-loan">New Loan</a>
-          </li>
-          
-        </ul>
-        <form class="d-flex">
-            <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="button" routerLink="login">
-                Login
-            </button>
-        </form>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="javascript:void(0)">Logo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="banker-list">Banker List</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="customer-list">Customer List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="application-list">Application</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="new-loan">New Loan</a>
+        </li>
+
+      </ul>
+      @if(loggedUserData){
+      <form class="d-flex">
+       <span class="navbar-text">{{loggedUserData.userName}}</span> 
+        <button class="btn btn-warning mx-2" type="button" routerLink="logout">
+          Logout
+        </button>
+      </form>
         
-      </div>
+      } @else {
+      <form class="d-flex">
+        <button class="btn btn-outline-success" type="button" routerLink="login">
+          Login
+        </button>
+      </form>
+      }
+
     </div>
-  </nav>  
-  <div class="container">
-    <router-outlet></router-outlet>
   </div>
-  
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

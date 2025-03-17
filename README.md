@@ -65,7 +65,7 @@ For more information on using the Angular CLI, including detailed command refere
 ## Angular 19 study link
 https://www.youtube.com/watch?v=aIAs7XYlPHk
 
-00:35:30
+00:43:56
 
 ## Installation
 1. npm install -g @angular/cli      [First Time need this commond, Also node & npm must installed]

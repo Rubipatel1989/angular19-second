@@ -9,4 +9,11 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'my-app';
+  loggedUserData: any;
+  constructor() {
+    const loggedData = sessionStorage.getItem('bankUser');
+    if (loggedData != null) {
+      this.loggedUserData = JSON.parse(loggedData);
+    }
+  }
 }

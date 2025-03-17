@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
-import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'; // Add ReactiveFormsModule
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -17,13 +18,17 @@ export class LoginComponent {
   });
 
   http = inject(HttpClient)
+  router = inject(Router);
   changeView() {
     this.showRegisterForm.set(!this.showRegisterForm());
   }
   login() {
-    this.http.post('https://projectapi.gerasim.in/api/BankLoan/Login', this.loginObj).subscribe((res: any) => {
+    const formValue = this.loginForm.value;
+    this.http.post('https://projectapi.gerasim.in/api/BankLoan/Login', formValue).subscribe((res: any) => {
       if (res.result) {
         alert("Login Successful");
+        sessionStorage.setItem('bankUser', JSON.stringify(res.data));
+        this.router.navigateByUrl('/application-list');
       } else {
         alert(res.message);
       }
