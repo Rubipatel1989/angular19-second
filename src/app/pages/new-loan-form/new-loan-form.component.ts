@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-new-loan-form',
@@ -7,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrl: './new-loan-form.component.css'
 })
 export class NewLoanFormComponent {
+  loanAppForm: FormGroup = new FormGroup({});
+  formBuilder = inject(FormBuilder);
 
+  initializeForm() {
+    this.loanAppForm = this.formBuilder.group({
+      loanAmount: [''],
+      loanTerm: [''],
+      loanType: ['']
+    });
+  }
 }
