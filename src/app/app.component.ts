@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from './service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,20 +8,20 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'my-app';
+export class AppComponent implements OnInit {
+  title = 'Banking Application';
   loggedUserData: any;
   router = inject(Router);
-  constructor() {
-    const loggedData = sessionStorage.getItem('bankUser');
-    if (loggedData != null) {
-      this.loggedUserData = JSON.parse(loggedData);
-    }
+  authService = inject(AuthService);
+
+  ngOnInit() {
+    this.authService.loggedUser$.subscribe(user => {
+      this.loggedUserData = user;
+    });
   }
 
   logout() {
-    sessionStorage.removeItem('bankUser');
-    this.loggedUserData = null;
+    this.authService.logout();
     this.router.navigateByUrl('/login');
   }
 }

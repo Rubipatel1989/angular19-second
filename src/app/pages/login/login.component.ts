@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'; // Add ReactiveFormsModule
 import { Router } from '@angular/router';
-
+import { AuthService } from '../../service/auth.service';
 @Component({
   selector: 'app-login',
   imports: [FormsModule, ReactiveFormsModule],
@@ -16,6 +16,7 @@ export class LoginComponent {
     userName: new FormControl(),
     password: new FormControl()
   });
+  authService = inject(AuthService);
 
   http = inject(HttpClient)
   router = inject(Router);
@@ -26,8 +27,8 @@ export class LoginComponent {
     const formValue = this.loginForm.value;
     this.http.post('https://projectapi.gerasim.in/api/BankLoan/Login', formValue).subscribe((res: any) => {
       if (res.result) {
-        alert("Login Successful");
-        sessionStorage.setItem('bankUser', JSON.stringify(res.data));
+        console.log(res.data);
+        this.authService.setLoggedUser(res.data); // Update session storage dynamically
         this.router.navigateByUrl('/application-list');
       } else {
         alert(res.message);
@@ -38,6 +39,7 @@ export class LoginComponent {
       alert(error.message);
     }));
   }
+  
   register() {
     this.http.post('https://projectapi.gerasim.in/api/BankLoan/RegisterCustomer', this.customerObj).subscribe((res: any) => {
       if (res.result) {
