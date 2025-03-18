@@ -23,12 +23,11 @@
       </ul>
       @if(loggedUserData){
       <form class="d-flex">
-       <span class="navbar-text">{{loggedUserData.userName}}</span> 
-        <button class="btn btn-warning mx-2" type="button" routerLink="logout">
+        <span class="navbar-text">{{loggedUserData.userName}}</span>
+        <button class="btn btn-warning mx-2" type="button" (click)="logout()" routerLink="logout">
           Logout
         </button>
       </form>
-        
       } @else {
       <form class="d-flex">
         <button class="btn btn-outline-success" type="button" routerLink="login">
