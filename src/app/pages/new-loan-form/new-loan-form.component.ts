@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-loan-form',
-  imports: [],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './new-loan-form.component.html',
   styleUrl: './new-loan-form.component.css'
 })
