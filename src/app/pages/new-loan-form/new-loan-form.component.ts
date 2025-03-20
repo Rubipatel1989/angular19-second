@@ -1,9 +1,10 @@
+import { NgFor } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-loan-form',
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule,],
   templateUrl: './new-loan-form.component.html',
   styleUrl: './new-loan-form.component.css'
 })
@@ -11,36 +12,46 @@ export class NewLoanFormComponent {
   loanAppForm: FormGroup = new FormGroup({});
   formBuilder = inject(FormBuilder);
 
+  ngOnInit() {
+    this.initializeForm();
+  }
+  
   initializeForm() {
     this.loanAppForm = this.formBuilder.group({
       applicationID: [0],
-      fullName: ['', Validators.required, Validators.minLength(3)],
-      applicationStatus: ['', Validators.required],
-      panCard: ['', Validators.required, Validators.pattern('^[A-Z]{5}[0-9]{4}[A-Z]{1}$')],
-      dateOfBirth: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      phone: ['', Validators.required, Validators.pattern('^[0-9]{10}$')],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      zipCode: ['', Validators.required, Validators.pattern('^[0-9]{6}$')],
-      annualIncome: ['', Validators.required, Validators.pattern('^[0-9]*$')],
-      employmentStatus: ['', Validators.required],
-      creditScore: ['', Validators.required],
-      assets: ['', Validators.required],
-      dateApplied: ['', Validators.required],
-      customerID: [0, Validators.required],
-      Loans: this.formBuilder.array([this.createLoanGroup()]),
+      fullName: [''],
+      applicationStatus: [''],
+      panCard: [''],
+      dateOfBirth: [''],
+      email: [''],
+      phone: [''],
+      address: [''],
+      city: [''],
+      state: [''],
+      zipCode: [''],
+      annualIncome: [''],
+      employmentStatus: [''],
+      creditScore: [''],
+      assets: [''],
+      dateApplied: [''],
+      customerID: [0],
+      loans: this.formBuilder.array([this.createLoanGroup()]), // Ensure at least one loan is added
+
     });
   }
 
   createLoanGroup() {
     return this.formBuilder.group({
       loanID: [0],
-      applicationID: [0, Validators.required],
-      bankName: ['', Validators.required],
-      loanAmount: [0, Validators.required],
-      emi: [0, Validators.required]
+      applicationID: [0],
+      bankName: [''],
+      loanAmount: [0],
+      emi: [0]
     });
   }
+
+  get loanList(): FormArray {
+    return this.loanAppForm.get('loans') as FormArray;
+  }
+  
 }
