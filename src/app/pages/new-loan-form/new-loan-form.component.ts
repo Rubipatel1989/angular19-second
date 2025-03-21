@@ -1,6 +1,8 @@
 import { NgFor } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MasterService } from '../../service/master.service';
+import { IAPIResponse } from '../../model/loan';
 
 @Component({
   selector: 'app-new-loan-form',
@@ -11,11 +13,21 @@ import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Va
 export class NewLoanFormComponent {
   loanAppForm: FormGroup = new FormGroup({});
   formBuilder = inject(FormBuilder);
+  masterService = inject(MasterService);
 
-  ngOnInit() {
-    this.initializeForm();
+  constructor() {
+    const loggedData = sessionStorage.getItem('bankUser');
+    if (!loggedData) {
+      alert('Please login to continue');
+      window.location.href = '/login';
+    } else {
+      this.initializeForm();
+      const data = JSON.parse(loggedData);
+      console.log(data);
+      this.loanAppForm.controls['customerId'].setValue(data.userId);
+    }
   }
-  
+
   initializeForm() {
     this.loanAppForm = this.formBuilder.group({
       applicationID: [0],
@@ -33,8 +45,8 @@ export class NewLoanFormComponent {
       employmentStatus: [''],
       creditScore: [''],
       assets: [''],
-      dateApplied: [''],
-      customerID: [0],
+      dateApplied: [new Date()],
+      customerId: [0],
       loans: this.formBuilder.array([this.createLoanGroup()]), // Ensure at least one loan is added
 
     });
@@ -58,5 +70,17 @@ export class NewLoanFormComponent {
   }
   removeLoan(index: number) {
     this.loanList.removeAt(index);
+  }
+  onSave() {
+    console.log(this.loanAppForm.value);
+    const formValue = this.loanAppForm.value;
+    this.masterService.onSaveLoan(formValue).subscribe((res: IAPIResponse) => {
+      if (res.result) {
+        alert(res.message);
+      } else {
+        alert(res.message);
+      }
+    }
+    );
   }
 }
