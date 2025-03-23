@@ -1,13 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAPIResponse, ILoan } from '../model/loan';
+import { IAPIResponse, ILoan, IUser } from '../model/loan';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MasterService {
 
-  constructor(private http: HttpClient) { }
+  loggedUserData!: IUser;;
+  constructor(private http: HttpClient) { 
+    const loggedData = sessionStorage.getItem('bankUser');
+    if (!loggedData) {
+      alert('Please login to continue');
+      window.location.href = '/login';
+    } else{
+      this.loggedUserData = JSON.parse(loggedData);
+    }
+  }
 
   onSaveLoan(obj: ILoan) {
     return this.http.post<IAPIResponse>('https://projectapi.gerasim.in/api/BankLoan/AddNewApplication', obj);

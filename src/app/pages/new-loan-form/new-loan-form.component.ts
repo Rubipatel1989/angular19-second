@@ -17,14 +17,12 @@ export class NewLoanFormComponent {
 
   constructor() {
     const loggedData = sessionStorage.getItem('bankUser');
-    if (!loggedData) {
+    if (!this.masterService.loggedUserData) {
       alert('Please login to continue');
       window.location.href = '/login';
     } else {
       this.initializeForm();
-      const data = JSON.parse(loggedData);
-      console.log(data);
-      this.loanAppForm.controls['customerId'].setValue(data.userId);
+      this.loanAppForm.controls['customerId'].setValue(this.masterService.loggedUserData.userId);
     }
   }
 
