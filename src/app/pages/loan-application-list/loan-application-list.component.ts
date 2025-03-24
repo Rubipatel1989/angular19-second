@@ -14,9 +14,9 @@ export class LoanApplicationListComponent {
 
   constructor() {
     if (this.masterService.loggedUserData.role == 'Customer') {
-
+      this.getCustomerApplication();
     } else {
-
+      this.getAssignedApplications();
     }
   }
   getCustomerApplication() {
