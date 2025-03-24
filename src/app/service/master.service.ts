@@ -22,9 +22,9 @@ export class MasterService {
     return this.http.post<IAPIResponse>('https://projectapi.gerasim.in/api/BankLoan/AddNewApplication', obj);
   }
   getMyApplications(userId: number) {
-    return this.http.get<IAPIResponse>(`https://projectapi.gerasim.in/api/BankLoan?customerId=${userId}`);
+    return this.http.get<IAPIResponse>(`https://projectapi.gerasim.in/api/BankLoan/GetMyApplications?customerId=${userId}`);
   }
   getApplicationAssigned(userId: number) {
-    return this.http.get<IAPIResponse>(`https://projectapi.gerasim.in/api/BankLoan?bankEmployeeId=${userId}`);
+    return this.http.get<IAPIResponse>(`https://projectapi.gerasim.in/api/BankLoan/GetApplicationAssignedToMe?bankEmployeeId=${userId}`);
   }
 }
