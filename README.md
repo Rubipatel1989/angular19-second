@@ -65,7 +65,7 @@ For more information on using the Angular CLI, including detailed command refere
 ## Angular 19 study link
 https://www.youtube.com/watch?v=aIAs7XYlPHk
 
-01:34:33
+01:43:33
 
 ## Installation
 1. npm install -g @angular/cli [First Time need this commond, Also node & npm must installed]
@@ -80,3 +80,8 @@ https://www.youtube.com/watch?v=aIAs7XYlPHk
  src/app/guard$ ng g g checkLogin
  ## Start a specific Port
   ng serve --port 4209
+
+
+
+  Username - sachinBankEmp
+  Password - 223344
