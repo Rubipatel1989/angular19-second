@@ -73,15 +73,16 @@ https://www.youtube.com/watch?v=aIAs7XYlPHk
 3. ng new my-app  [create angular project]
 4. ng serve
 ## Generate Component
- ng g c components/variables
- ## install bootstrap & css
- npm i bootstrap font-awesome
- ## Generate guard
- src/app/guard$ ng g g checkLogin
- ## Start a specific Port
-  ng serve --port 4209
+ng g c components/variables
+## install bootstrap & css
+npm i bootstrap font-awesome
+## Generate guard
+src/app/guard$ ng g g checkLogin
+## Start a specific Port
+ng serve --port 4209
 
 
+## SWagger API Link
+https://projectapi.gerasim.in/index.html
 
-  Username - sachinBankEmp
-  Password - 223344
+Bank L0an
