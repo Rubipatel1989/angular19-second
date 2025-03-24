@@ -16,11 +16,11 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="application-list">Application</a>
         </li>
-        <!-- @if(loggedUserData.role === 'Customer'){ -->
+        @if(loggedUserData && loggedUserData.role === 'Customer'){
           <li class="nav-item">
             <a class="nav-link" routerLink="new-loan">New Loan</a>
           </li>
-        <!-- } -->
+        }
       </ul>
       @if(loggedUserData){
       <form class="d-flex">
